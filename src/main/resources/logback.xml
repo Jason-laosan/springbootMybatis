@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" debug="false">
+    <property name="APP_NAME" value="hxjb-spring-demo"/>
+    <property name="LOG_HOME" value="hxjb-spring-demo/logs"/>
+    <contextName>${APP_NAME}</contextName>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+
+        <!-- encoder默认配置为PartternLayoutEncoder    -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="ROLLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>365</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ERRORFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- <file>${LOG_HOME}/${APP_NAME}/mylog.txt</file>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}.%i.error.log</fileNamePattern>
+            <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>365</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="LOG_INSERT_ERROR" level="error" additivity="false">
+        <appender-ref ref="ERRORFILE"/>
+    </logger>
+
+
+    <!-- Connection Log -->
+    <logger name="com.ibatis" additivity="false">
+        <level value="info"/>
+    </logger>
+    <logger name="org.apache.ibatis.jdbc.ScriptRunner">
+        <level value="info"/>
+    </logger>
+    <logger name="com.ibatis.common.jdbc.SimpleDataSource">
+        <level value="info"/>
+    </logger>
+    <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate">
+        <level value="info"/>
+    </logger>
+    <logger name="java.sql.Connection" additivity="false">
+        <level value="info"/>
+    </logger>
+    <logger name="java.sql.PreparedStatement" additivity="false">
+        <level value="info"/>
+    </logger>
+    <logger name="java.sql.ResultSet" additivity="false">
+        <level value="info"/>
+    </logger>
+    <logger name="java.sql.Statement" additivity="false">
+        <level value="info"/>
+    </logger>
+
+    <logger name="org.apache.tomcat.util.http.Parameters" additivity="false">
+        <level value="info"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ROLLINGFILE"/>
+    </root>
+</configuration>
