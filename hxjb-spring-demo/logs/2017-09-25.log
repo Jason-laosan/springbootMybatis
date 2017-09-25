@@ -1,5 +1,0 @@
-2017-09-25 09:21:30.960 [Thread-18] INFO  o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@12b0404f: startup date [Sun Sep 24 12:48:52 CST 2017]; root of context hierarchy
-2017-09-25 09:21:30.992 [Thread-18] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
-2017-09-25 09:21:30.993 [Thread-18] INFO  o.s.jmx.export.annotation.AnnotationMBeanExporter - Unregistering JMX-exposed beans
-2017-09-25 09:21:30.999 [Thread-18] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
-2017-09-25 09:21:31.077 [localhost-startStop-2] INFO  com.springbootmybatis.SpringbootmybatisApplication - ServletContext destroyed
